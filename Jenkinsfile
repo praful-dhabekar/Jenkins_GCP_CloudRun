@@ -1,24 +1,26 @@
 pipeline {
     agent any
     tools {
-	jdk 'java17015'
-	maven 'maven387'
+		jdk 'java17015'
+		maven 'maven387'
     }
     environment {
-	SONAR_SCANNER_HOME = tool 'sonar7'
-	IMAGE_NAME = "java-app"
-        IMAGE_TAG = "${BUILD_NUMBER}"
-	GCP_PROJECT_ID = "focal-dock-440200-u5"
-	FULL_IMAGE_NAME = "us-docker.pkg.dev/${GCP_PROJECT_ID}/java-app-repo-02/${IMAGE_NAME}:${IMAGE_TAG}"
-	SERVICE_NAME = "java-app-service"
-	REGION = "us-central1"
+		// SONAR_SCANNER_HOME = tool 'sonar7'
+		IMAGE_NAME = "java-todo-app"
+	    IMAGE_TAG = "${BUILD_NUMBER}"
+		REPO_NAME = "todo-app-registry"
+		GCP_PROJECT_ID = "project-d64746f5-a7db-400d-898"
+		FULL_IMAGE_NAME = "us-docker.pkg.dev/${GCP_PROJECT_ID}/${REPO_NAME}/${IMAGE_NAME}:${IMAGE_TAG}"
+		SERVICE_NAME = "todo-app-service"
+		REGION = "asia-south1"
+		echo "${BUILD_NUMBER}"
     }
     stages {
         stage('Initialize Pipeline'){
             steps {
                 echo 'Initializing Pipeline ...'
-		sh 'java -version'
-		sh 'mvn -version'
+				sh 'java -version'
+				sh 'mvn -version'
             }
         }
         stage('Checkout GitHub Codes'){
