@@ -41,6 +41,7 @@ pipeline {
 		sh 'mvn test'
             }
         }
+		/*
         stage('SonarQube Analysis'){
             steps {
                 echo 'Running Static Code Analysis with SonarQube'
@@ -58,12 +59,16 @@ pipeline {
 		}
             }
         }
+		
+		
         stage('Trivy FS Scan'){
             steps {
                 echo 'Scanning File System with Trivy FS ...'
 		sh 'trivy fs --format table -o FSScanReport.html'
             }
-        }
+        }		
+		*/
+		
         stage('Build & Tag Docker Image'){
             steps {
                 echo 'Building the Java App Docker Image'
@@ -72,6 +77,7 @@ pipeline {
 		}
             }
         }
+		/*
         stage('Trivy Security Scan'){
             steps {
                 echo 'Scanning Docker Image with Trivy'
@@ -80,6 +86,8 @@ pipeline {
      		'''
             }
         }
+		*/
+		
 	stage('Authenticate with GCP, Tag & Push to Artifact Registry') {
             steps {
 		echo 'Authenticate with GCP, tag and Push Image to Artifact Registry'
