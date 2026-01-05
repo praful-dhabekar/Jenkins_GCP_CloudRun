@@ -13,7 +13,6 @@ pipeline {
 		FULL_IMAGE_NAME = "us-docker.pkg.dev/${GCP_PROJECT_ID}/${REPO_NAME}/${IMAGE_NAME}:${IMAGE_TAG}"
 		SERVICE_NAME = "todo-app-service"
 		REGION = "asia-south1"
-		echo "${BUILD_NUMBER}"
     }
     stages {
         stage('Initialize Pipeline'){
@@ -21,6 +20,7 @@ pipeline {
                 echo 'Initializing Pipeline ...'
 				sh 'java -version'
 				sh 'mvn -version'
+				echo "${BUILD_NUMBER}"
             }
         }
         stage('Checkout GitHub Codes'){
